@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Breeji Offloader</title>
+
+  <!-- Filepond stylesheet -->
+  <link href="filepond.min.css" rel="stylesheet">
+  <link href="filepond-plugin-image-preview.css" rel="stylesheet">
+  <!-- Force latest IE rendering engine or ChromeFrame if installed -->
+    <!--[if IE]>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <![endif]-->
+    <meta charset="utf-8" />
+    <title>Breeji Offloader</title>
+    <meta
+      name="description"
+      content="File upload with drag and drop functionality."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap styles -->
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <!-- Generic page styles -->
+    <style>
+      #navigation {
+        margin: 10px 0;
+      }
+      @media (max-width: 767px) {
+        #title,
+        #description {
+          display: none;
+        }
+      }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <ul class="nav nav-tabs" id="navigation">
+      <li class="active">
+        <a href="index.html"><strong>Upload</strong></a>
+      </li>
+      <li>
+        <a href="about.html"><strong>About</strong></a>
+      </li>
+    </ul>
+  </div>
+  <!-- We'll transform this input into a pond -->
+  <input type="file" class="filepond" required multiple>
+<!--  name="filepond"-->
+<!--    multiple="true"-->
+<!--    data-allow-reorder="false"-->
+<!--    data-max-file-size="10MB"-->
+<!--    data-max-files="200">-->
+
+  <!-- Load FilePond library -->
+  <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+  <script src="filepond.min.js"></script>
+
+  <!-- Turn all file input elements into ponds -->
+  <script>
+    const inputElement = document.querySelector('input[type="file"]');
+    const pond = FilePond.create( inputElement, {
+        dropOnPage: true,
+        allowMultiple: true,
+        labelTapToUndo: 'tap to close',
+        server: 'upload',
+        imagePreviewHeight: 10,
+        maxParallelUploads: 50,
+    });
+    // Register the plugin
+    FilePond.registerPlugin(FilePondPluginImagePreview);
+    pond.appendTo(document.body)
+    FilePond.parse(document.body);
+  </script>
+</body>
+</html>

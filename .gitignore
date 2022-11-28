@@ -1,0 +1,17 @@
+.idea
+.DS_store
+offloader
+build/
+coverage.html
+coverage.out
+
+qr.png
+keys/
+
+offloader-*
+uploads/
+*.log
+pkged.go
+*.lic
+*.swp
+*.tar.gz

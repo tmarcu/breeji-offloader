@@ -1,0 +1,12 @@
+These licenses apply to various third party snippets or files used to create the
+offloader binary.
+
+filepond:
+	* Copyright (c) 2019 PQINA | Rik Schennink <rik@pqina.nl>
+	* https://github.com/pqina/filepond
+	* Licensed under MIT https://github.com/pqina/filepond/blob/master/LICENSE
+
+bootstrap:
+	* Copyright 2011-2016 Twitter, Inc.
+	* Bootstrap v3.3.7 (http://getbootstrap.com)
+	* Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)

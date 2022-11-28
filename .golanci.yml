@@ -1,0 +1,121 @@
+output:
+  # colored-line-number|line-number|json|tab|checkstyle|code-climate, default is "colored-line-number"
+  format: colored-line-number
+  ​
+linters-settings:
+  govet:
+    check-shadowing: true
+    settings:
+  golint:
+    min-confidence: 0
+  gocyclo:
+    min-complexity: 20
+  gocognit:
+    min-complexity: 30
+  maligned:
+    suggest-new: true
+  dupl:
+    threshold: 50
+  goconst:
+    min-len: 3
+    min-occurrences: 3
+  depguard:
+    list-type: blacklist
+    # add blacklisted imports here
+  misspell:
+    locale: US
+  lll:
+    line-length: 190
+  goimports:
+    local-prefixes: github.com/golangci/golangci-lint
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+    disabled-checks:
+      - hugeParam # Enable this to check for performance increases based on large parameters
+      - rangeValCopy # Enable this to check for performance increases based on loop variable size
+      - unnamedResult # Named params are discouraged
+      - sloppyReassign # Not usually relevant or useful
+      - paramTypeCombine # Stick to consistent style, this is subjective per project
+  ​
+funlen:
+  lines: 130
+  statements: 70
+  ​
+linters:
+  # please, do not use `enable-all`: it is deprecated and will be removed soon.
+  # inverted configuration with `enable-all` and `disable` is not scalable during updates of golangci-lint
+  disable-all: true
+  enable:
+    - bodyclose
+    - deadcode
+    - depguard
+    - dogsled
+    - errcheck
+    - funlen
+    - gochecknoglobals
+    - gochecknoinits
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - golint
+    - gosec
+    - gosimple
+    - govet
+    - lll
+    - ineffassign
+    - interfacer
+    - megacheck
+    - misspell
+    - nakedret
+    - scopelint
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - whitespace
+    - maligned
+    - prealloc
+  ​
+  # don't enable:
+  # - dupl # This is disabled because it reports dups too loosely
+  # - godox There are TODO's in the code which are OK, don't report every lint run
+  ​
+run:
+  deadline: 15m
+  timeout:  15m
+  ​
+skip-dirs:
+  - test/
+  - vendor/
+skip-files:
+  #- .*_test.go
+  - internal/cache/.*_test.go
+  ​
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  ​
+exclude-rules:
+  # Disable linters for internal repos included
+  - path: internal/(cache|renameio)/
+    linters:
+      - lll
+      - gochecknoinits
+      - gocyclo
+      - funlen
+  # Disable some linters for *_test files
+  - path: _test\.go
+    linters:
+      - lll # Don't whine about long lines in tests, some testdata is long
